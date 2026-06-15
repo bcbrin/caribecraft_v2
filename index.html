@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caribe Craft — Custom Millwork | St. Thomas, USVI</title>
+  <meta name="description" content="Caribe Craft is a custom millwork company in St. Thomas, U.S. Virgin Islands. Caribbean Inspired, Caribbean Made — custom cabinetry, architectural millwork, hospitality and retail buildouts, doors, windows, and fine furniture." />
+  <style>
+    :root {
+      /* Palette drawn from the Caribe Craft logo + Caribbean sea/sand */
+      --ocean: #15539e;        /* deep logo blue */
+      --ocean-dark: #0d3a73;   /* darker logo blue */
+      --ocean-deep: #0a2c57;   /* near-navy */
+      --turq: #1ca9b6;         /* Caribbean turquoise */
+      --turq-light: #5fd0d8;
+      --sand: #f6efe2;         /* warm beach sand */
+      --sand-deep: #ece0c9;
+      --coral: #e2774e;        /* sunset coral accent */
+      --coral-dark: #c85f3a;
+      --mahogany: #7a4a2b;     /* rich island hardwood */
+      --ink: #15212e;
+      --muted: #5b6a78;
+      --white: #ffffff;
+      --shadow: 0 14px 38px rgba(10, 44, 87, 0.18);
+      --shadow-sm: 0 6px 18px rgba(10, 44, 87, 0.12);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.65;
+      background: var(--white);
+    }
+
+    h1, h2, h3, h4 { line-height: 1.18; font-weight: 700; }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { display: block; max-width: 100%; }
+
+    .container { width: min(1160px, 92%); margin: 0 auto; }
+
+    /* ---------- Brand lockup (logo) ---------- */
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .brand .logo-img { height: 52px; width: auto; display: block; }
+    .brand .logo-fallback {
+      display: none; align-items: center; justify-content: center;
+      height: 54px; padding: 0 22px;
+      border-radius: 999px / 100%;
+      background:
+        radial-gradient(120% 150% at 30% 25%, #4f86c6 0%, var(--ocean) 42%, var(--ocean-dark) 100%);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.45), inset 0 -3px 8px rgba(0,0,0,0.25), 0 4px 12px rgba(10,44,87,0.3);
+      border: 2px solid rgba(255,255,255,0.55);
+    }
+    .brand .logo-fallback .stack { text-align: center; line-height: 1; }
+    .brand .logo-fallback .top {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700; font-style: italic;
+      color: #fff; font-size: 1.5rem; letter-spacing: 0.3px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+    }
+    .brand .logo-fallback .bot {
+      color: #eaf2fb; font-size: 0.52rem; font-weight: 700;
+      letter-spacing: 4px; text-transform: uppercase; margin-top: 2px;
+    }
+
+    /* ---------- Navbar ---------- */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 14px rgba(10, 44, 87, 0.08);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    nav ul { list-style: none; display: flex; gap: 28px; align-items: center; }
+    nav a { font-weight: 600; color: var(--ink); transition: color 0.2s; }
+    nav a:hover { color: var(--ocean); }
+    .nav-cta {
+      background: var(--coral); color: #fff !important;
+      padding: 11px 20px; border-radius: 999px;
+      box-shadow: var(--shadow-sm); transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--coral-dark); transform: translateY(-1px); }
+    .menu-toggle { display: none; background: none; border: 0; font-size: 1.6rem; color: var(--ocean); cursor: pointer; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-block; padding: 15px 32px; border-radius: 999px;
+      font-weight: 700; cursor: pointer; border: 0;
+      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-primary { background: var(--coral); color: #fff; box-shadow: var(--shadow); }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--coral-dark); }
+    .btn-ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.75); margin-left: 12px; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; color: #fff; text-align: center;
+      padding: 150px 0 130px; overflow: hidden;
+      background:
+        linear-gradient(rgba(10, 44, 87, 0.74), rgba(13, 58, 115, 0.80)),
+        url("assets/134707744_2805371093008143_9100931234025546415_n.jpg") center/cover no-repeat;
+    }
+    .hero h1 { font-size: clamp(2.4rem, 5.2vw, 4.1rem); margin-bottom: 18px; }
+    .hero h1 .accent { color: var(--turq-light); }
+    .hero p { font-size: clamp(1.05rem, 2vw, 1.3rem); max-width: 660px; margin: 0 auto 34px; opacity: 0.96; }
+    .hero .tagline {
+      color: #ffd9a8; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; font-size: 0.92rem; margin-bottom: 16px;
+    }
+    /* Wave divider at the bottom of the hero */
+    .wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; }
+    .wave svg { width: 100%; height: 70px; display: block; }
+
+    /* ---------- Sections ---------- */
+    section { padding: 92px 0; }
+    .section-head { text-align: center; max-width: 700px; margin: 0 auto 58px; }
+    .section-head .eyebrow {
+      color: var(--turq); font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; font-size: 0.85rem;
+    }
+    .section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); margin: 10px 0 14px; color: var(--ocean-deep); }
+    .section-head p { color: var(--muted); }
+
+    /* ---------- About ---------- */
+    .about { background: var(--sand); position: relative; }
+    .about-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 54px; align-items: center; }
+    .about-grid .img-wrap { position: relative; }
+    .about-grid img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); aspect-ratio: 4 / 3; object-fit: cover; }
+    .about-grid .badge {
+      position: absolute; bottom: -22px; right: -16px;
+      background: var(--ocean); color: #fff; border-radius: 14px;
+      padding: 16px 22px; box-shadow: var(--shadow); text-align: center;
+      border: 3px solid #fff;
+    }
+    .about-grid .badge b { display: block; font-size: 1.5rem; }
+    .about-grid .badge span { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.9; }
+    .about .eyebrow { color: var(--turq); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; }
+    .about h2 { color: var(--ocean-deep); font-size: clamp(1.8rem, 3.4vw, 2.4rem); margin: 10px 0 16px; }
+    .about p { color: var(--muted); margin-bottom: 14px; }
+    .stats { display: flex; gap: 34px; margin-top: 26px; flex-wrap: wrap; }
+    .stats .num { font-size: 2rem; font-weight: 800; color: var(--ocean); }
+    .stats small { color: var(--muted); }
+
+    /* ---------- Services ---------- */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 26px; }
+    .service-card {
+      background: #fff; border: 1px solid #e9eef4; border-radius: var(--radius);
+      padding: 34px 28px; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: transparent; }
+    .service-card .icon {
+      width: 58px; height: 58px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--turq), var(--ocean));
+      display: grid; place-items: center; font-size: 1.7rem; margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .service-card h3 { margin-bottom: 10px; color: var(--ocean-deep); font-size: 1.18rem; }
+    .service-card p { color: var(--muted); font-size: 0.96rem; }
+
+    /* ---------- Gallery ---------- */
+    .gallery { background: var(--ocean-deep); position: relative; }
+    .gallery .section-head h2, .gallery .section-head p { color: #fff; }
+    .gallery .section-head p { opacity: 0.82; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+    .gallery-item { position: relative; overflow: hidden; border-radius: var(--radius); aspect-ratio: 4 / 3; box-shadow: var(--shadow-sm); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s; }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item .caption {
+      position: absolute; inset: auto 0 0 0;
+      background: linear-gradient(transparent, rgba(10,44,87,0.94));
+      color: #fff; padding: 46px 18px 16px;
+      opacity: 0; transform: translateY(10px); transition: all 0.3s;
+    }
+    .gallery-item .caption b { display: block; font-size: 1.02rem; }
+    .gallery-item .caption span { font-size: 0.82rem; color: var(--turq-light); }
+    .gallery-item:hover .caption { opacity: 1; transform: translateY(0); }
+    .gallery-note { text-align: center; color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 28px; }
+
+    /* ---------- Contact ---------- */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 52px; }
+    .contact-info h3 { color: var(--ocean-deep); margin-bottom: 18px; font-size: 1.4rem; }
+    .contact-info .line { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+    .contact-info .line .ic { color: var(--coral); font-size: 1.2rem; line-height: 1.4; }
+    .contact-info .line span { color: var(--muted); }
+    .contact-info .line a { color: var(--muted); }
+    .contact-info .line a:hover { color: var(--ocean); }
+    form { background: #fff; padding: 36px; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid #e9eef4; }
+    .field { margin-bottom: 18px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.92rem; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid #d6dee7;
+      border-radius: 10px; font: inherit; transition: border 0.2s, box-shadow 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--turq);
+      box-shadow: 0 0 0 3px rgba(28,169,182,0.18);
+    }
+    textarea { resize: vertical; min-height: 120px; }
+    .field.error input, .field.error select, .field.error textarea { border-color: #e05252; }
+    .err-msg { color: #e05252; font-size: 0.82rem; margin-top: 4px; display: none; }
+    .field.error .err-msg { display: block; }
+    .form-note { text-align: center; margin-top: 14px; font-weight: 600; }
+    .form-note.ok { color: #1f9d55; }
+
+    /* ---------- Footer ---------- */
+    footer { background: var(--ink); color: #c2cdda; padding: 54px 0 26px; }
+    .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 34px; margin-bottom: 32px; }
+    footer h4 { color: #fff; margin-bottom: 14px; }
+    footer p { font-size: 0.92rem; margin-bottom: 6px; }
+    footer a { color: #c2cdda; transition: color 0.2s; }
+    footer a:hover { color: #fff; }
+    .footer-tag { color: var(--turq-light); font-style: italic; font-weight: 600; }
+    .footer-bottom { border-top: 1px solid #283545; padding-top: 20px; text-align: center; font-size: 0.88rem; color: #8493a3; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 880px) {
+      nav ul { display: none; }
+      .menu-toggle { display: block; }
+      nav ul.open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: absolute; top: 76px; right: 4%;
+        background: #fff; padding: 18px 22px; border-radius: 12px;
+        box-shadow: var(--shadow); gap: 16px;
+      }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-grid .badge { right: 16px; }
+      .btn-ghost { margin-left: 0; margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="Caribe Craft Custom Millwork home">
+        <img class="logo-img" src="assets/logo.png" alt="Caribe Craft Custom Millwork" onerror="this.style.display='none';var f=this.parentNode.querySelector('.logo-fallback');if(f)f.style.display='flex';" />
+        <span class="logo-fallback" aria-hidden="true">
+          <span class="stack">
+            <span class="top">CaribeCraft</span>
+            <span class="bot">Custom Millwork</span>
+          </span>
+        </span>
+      </a>
+      <nav>
+        <ul id="navmenu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" aria-label="Toggle menu" onclick="document.getElementById('navmenu').classList.toggle('open')">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="home">
+    <div class="container">
+      <p class="tagline">St. Thomas &bull; U.S. Virgin Islands</p>
+      <h1>Caribbean Inspired.<br><span class="accent">Caribbean Made.</span></h1>
+      <p>Caribe Craft is St. Thomas' full-service custom millwork shop — designing, building, and installing fine cabinetry, architectural woodwork, and hospitality interiors for homes and businesses across the Virgin Islands.</p>
+      <div>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+        <a href="#gallery" class="btn btn-ghost">View Our Work</a>
+      </div>
+    </div>
+    <div class="wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M0,32 C240,72 480,72 720,40 C960,8 1200,8 1440,40 L1440,70 L0,70 Z"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What We Do</span>
+        <h2>Our Services</h2>
+        <p>From a single heirloom piece to a full hotel buildout, every project is designed, milled, finished, and installed by our team — built to endure the island's salt air and humidity.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">&#129683;</div>
+          <h3>Custom Cabinetry</h3>
+          <p>Kitchens, baths, vanities, and built-ins tailored to your space using tropical and marine-grade hardwoods.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#127976;</div>
+          <h3>Hospitality &amp; Commercial</h3>
+          <p>Hotel furniture, reception desks, and bar buildouts — produced at volume for resorts and hospitality clients across the Caribbean.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#128717;</div>
+          <h3>Retail Buildouts</h3>
+          <p>Display cases, showcases, and wall paneling for retail and duty-free stores, delivered turnkey from design to install.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#127968;</div>
+          <h3>Architectural Millwork</h3>
+          <p>Crown molding, wainscoting, columns, railings, and trim that bring detail and character to any interior.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#128682;</div>
+          <h3>Doors &amp; Windows</h3>
+          <p>Custom mahogany doors, shutters, and window fabrication built for coastal durability and island style.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">&#9962;</div>
+          <h3>Ecclesiastical Woodwork</h3>
+          <p>Pulpits, reredos, bishop's chairs, and church furnishings crafted with traditional joinery and fine detail.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="img-wrap">
+        <img src="assets/46494446_2195753340636591_1496430648183750656_n.jpg" alt="Custom millwork crafted by Caribe Craft" />
+        <div class="badge"><b>18,000</b><span>Sq Ft Shop</span></div>
+      </div>
+      <div>
+        <span class="eyebrow">Island Craftsmanship</span>
+        <h2>Rooted in St. Thomas Since the 1980s</h2>
+        <p>What began as a small woodworking shop has grown into one of the Virgin Islands' premier millwork operations. From our 18,000-square-foot facility on Subbase, our skilled team handles everything in-house — design, fabrication, finishing, and installation.</p>
+        <p>We've crafted everything from island kitchens and custom furniture to large-scale hospitality and retail interiors throughout the Caribbean. We understand these islands — the salt air, the humidity, the light — and we build for them.</p>
+        <p>Every project is <em>Caribbean Inspired and Caribbean Made</em>, finished to a standard we're proud to put our name on.</p>
+        <div class="stats">
+          <div><div class="num">40+</div><small>Years of Craft</small></div>
+          <div><div class="num">500+</div><small>Projects Delivered</small></div>
+          <div><div class="num">100%</div><small>Made to Order</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Gallery ===== -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our Portfolio</span>
+        <h2>Project Gallery</h2>
+        <p>A selection of the custom millwork we've crafted for homes, hotels, and businesses across the Virgin Islands.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/492281046_3969173166627924_5005403148566738350_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Custom Cabinetry</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/492403476_3969303176614923_6344755577917176288_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Architectural Millwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/492420460_3969303436614897_423190021993268922_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Fine Woodwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/492542764_3969173586627882_8679574291479983396_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Custom Cabinetry</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/492708085_3969303209948253_9099652722472598586_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Architectural Millwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/492967012_3969303159948258_7140301362253155472_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Fine Woodwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/493261427_3969303479948226_467725412755294326_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Custom Joinery</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/474535226_1576799256514420_5195790338177565308_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Custom Woodwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/81353019_2496135387265050_5787456706099281920_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Custom Cabinetry</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/81699063_2496135407265048_8549946719897387008_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Architectural Millwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/134707744_2805371093008143_9100931234025546415_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Fine Woodwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/46494446_2195753340636591_1496430648183750656_n.jpg" alt="Custom millwork project by Caribe Craft" loading="lazy" />
+          <div class="caption"><b>Custom Woodwork</b><span>Caribe Craft &bull; St. Thomas</span></div>
+        </div>
+      </div>
+      <p class="gallery-note">See more of our work on our Facebook page.</p>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Get In Touch</span>
+        <h2>Start Your Project</h2>
+        <p>Tell us about your vision and we'll get back to you with a custom quote.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Visit the Workshop</h3>
+          <div class="line"><span class="ic">&#128205;</span><span>8262 Subbase, Charlotte Amalie<br>St. Thomas, U.S. Virgin Islands 00802</span></div>
+          <div class="line"><span class="ic">&#128222;</span><span><a href="tel:+13407749545">(340) 774-9545</a></span></div>
+          <div class="line"><span class="ic">&#9993;</span><span><a href="mailto:info@caribecraft.com">info@caribecraft.com</a></span></div>
+          <div class="line"><span class="ic">&#128336;</span><span>Monday – Friday: 8:00am – 5:00pm<br>Saturday: By appointment</span></div>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" />
+            <span class="err-msg">Please enter your name.</span>
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" />
+            <span class="err-msg">Please enter a valid email address.</span>
+          </div>
+          <div class="field">
+            <label for="project">Project Type</label>
+            <select id="project" name="project">
+              <option value="">Select a service…</option>
+              <option>Custom Cabinetry</option>
+              <option>Hospitality &amp; Commercial</option>
+              <option>Retail Buildout</option>
+              <option>Architectural Millwork</option>
+              <option>Doors &amp; Windows</option>
+              <option>Ecclesiastical Woodwork</option>
+              <option>Fine Furniture</option>
+              <option>Other</option>
+            </select>
+            <span class="err-msg">Please choose a project type.</span>
+          </div>
+          <div class="field">
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" placeholder="Tell us about your project, timeline, and budget…"></textarea>
+            <span class="err-msg">Please add a few details about your project.</span>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div style="max-width:300px;">
+          <h4>Caribe Craft</h4>
+          <p>Custom millwork crafted with care in St. Thomas, U.S. Virgin Islands.</p>
+          <p class="footer-tag">Caribbean Inspired, Caribbean Made.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <p><a href="#services">Services</a></p>
+          <p><a href="#gallery">Gallery</a></p>
+          <p><a href="#about">About</a></p>
+          <p><a href="#contact">Contact</a></p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>8262 Subbase, Charlotte Amalie</p>
+          <p>St. Thomas, USVI 00802</p>
+          <p><a href="tel:+13407749545">(340) 774-9545</a></p>
+          <p><a href="mailto:info@caribecraft.com">info@caribecraft.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="year"></span> Caribe Craft Custom Millwork. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Close mobile menu on link click
+    document.querySelectorAll("#navmenu a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        document.getElementById("navmenu").classList.remove("open");
+      });
+    });
+
+    // Contact form validation
+    var form = document.getElementById("contactForm");
+    var note = document.getElementById("formNote");
+
+    function setError(field, hasError) {
+      field.closest(".field").classList.toggle("error", hasError);
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      note.textContent = "";
+      note.classList.remove("ok");
+
+      var name = form.name;
+      var email = form.email;
+      var project = form.project;
+      var message = form.message;
+      var valid = true;
+
+      var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      setError(name, name.value.trim() === "");
+      if (name.value.trim() === "") valid = false;
+
+      setError(email, !emailRe.test(email.value.trim()));
+      if (!emailRe.test(email.value.trim())) valid = false;
+
+      setError(project, project.value === "");
+      if (project.value === "") valid = false;
+
+      setError(message, message.value.trim() === "");
+      if (message.value.trim() === "") valid = false;
+
+      if (valid) {
+        note.textContent = "Thanks! Your message has been sent. We'll be in touch soon.";
+        note.classList.add("ok");
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
